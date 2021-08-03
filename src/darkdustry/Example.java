@@ -4,6 +4,7 @@ package darkdustry;
 //Импорты пакетов из arc
 import arc.util.*;
 import arc.*;
+import arc.graphics.*;
 
 //Импорты пакетов из mindustry
 import mindustry.mod.*;
@@ -12,6 +13,8 @@ import mindustry.gen.*;
 import mindustry.game.*;
 import mindustry.net.*;
 import mindustry.game.EventType.*;
+import mindustry.content.*;
+import mindustry.entities.*;
 
 public class Example extends Plugin {
 
@@ -27,7 +30,7 @@ public class Example extends Plugin {
 
         Vars.netServer.admins.addActionFilter(action -> {
             //Определяем тип действия
-            if(action.type == ActionType.rotate) {
+            if(action.type == Administration.ActionType.rotate) {
                 //Проверяем, существует ли этот игрок
                 if (action.player != null) {
                     //Отправляем игроку сообщение
@@ -80,7 +83,7 @@ public class Example extends Plugin {
 
         Events.run(Trigger.update, () -> {
             //А вот он и таймер. Каждые 15 минут этот код отправляет сообщение в чат.
-            if(interval.get(1, 60 * 60 * 15) && state.isPlaying()) {
+            if(interval.get(1, 60 * 60 * 15) && Vars.state.isPlaying()) {
                 //Отправляем сообщение в чат
                 Call.sendMessage("Прошло ещё 15 минут!");
             }

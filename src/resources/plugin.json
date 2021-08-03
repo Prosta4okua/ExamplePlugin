@@ -1,11 +1,11 @@
 {
-  "name": "Plugin",
-  "displayName": "Plugin",
-  "description": "It is a plugin",
-  "author": "Darkdustry",
-  "main": "mindurka.Template",
+  "name": "ExamplePlugin",
+  "displayName": "Example Plugin",
+  "description": "Example plugin to show some basic features.",
+  "author": "Darkness6030",
+  "main": "darkdustry.Example",
   "hidden": false,
   "java": true,
-  "version": "2.1",
-  "minGameVersion": 127.2
+  "version": "1.0",
+  "minGameVersion": 129.1
 }

@@ -166,5 +166,14 @@ public class Example extends Plugin {
     @Override
     public void registerServerCommands(CommandHandler handler) {
 
+        //Делаем простейшую команду для консоли, которая убивает всех юнитов на карте.
+        //Задаём аргументы, название и описание так же, как и для команд игроков.
+
+        handler.register("despw", "Убить всех юнитов на карте.", args -> {
+            //Убиваем юнитов, пробегаясь по каждому из них
+            Groups.unit.each(Unit::kill);
+            //Отправляем в консоль сообщение с информацией
+            Log.info("Все юниты убиты!");
+        });
     }
 }

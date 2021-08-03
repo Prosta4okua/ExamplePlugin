@@ -1,4 +1,5 @@
 # Плагин-пример. 
+## If you want an English version of this plugin, DM me: Даркнесс#3729
 Чтобы увидеть, как работает плагин, заходи в папку src/darkdustry и открывай файл Example.java
 Там все расписано с пояснениями.
 ## Примечания:

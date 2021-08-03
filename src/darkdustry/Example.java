@@ -10,7 +10,7 @@ import mindustry.mod.*;
 import mindustry.Vars;
 import mindustry.gen.*;
 import mindustry.game.*;
-import mindustry.net*;
+import mindustry.net.*;
 import mindustry.game.EventType.*;
 
 public class Example extends Plugin {
@@ -48,7 +48,7 @@ public class Example extends Plugin {
         });
 
 
-        //Ивент нажатия на экран.
+        //Ивент нажатия на тайл.
 
         Events.on(TapEvent.class, event -> {
             //Объявляем переменную типа Player
@@ -58,6 +58,31 @@ public class Example extends Plugin {
                 //Вызываем эффект "burning" в том месте, куда нажал игрок
                 //Задаём этому эффекту поворот 100 градусов и цвет "#4169e1ff"
                 Call.effect(Fx.burning, event.tile.x, event.tile.y, 100.0, Color.valueOf("#4169e1ff"));
+            }
+        });
+
+        
+        //Ивент подключения игрока к серверу. 
+        //Вызывается при попытке подключения к нему, даже если игрок не зашёл.
+
+        Events.on(PlayerConnect.class, event -> {
+            Player player = event.player;
+            //Проверяем, содержит ли никнейм игрока нужную фразу
+            if(player.name().contains("Дарк")) {
+                //Кикаем игрока по своей причине на 60000 секунд
+                player.con.kick("Шизоидам на сервере не место", 60000);
+            }
+        });
+
+
+        //По сути ивент, который происходит всегда.
+        //Нужен для таймеров и т.д.
+
+        Events.run(Trigger.update, () -> {
+            //А вот он и таймер. Каждые 15 минут этот код отправляет сообщение в чат.
+            if(interval.get(1, 60 * 60 * 15) && state.isPlaying()) {
+                //Отправляем сообщение в чат
+                Call.sendMessage("Прошло ещё 15 минут!");
             }
         });
     }

@@ -114,7 +114,7 @@ public class Example extends Plugin {
             //Вычисляем, сколько голосов надо для успешного завершения голосования
             int req = (int) Math.ceil(ratio * Groups.player.size());
             //Уведомляем всех о выходе игрока
-            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: " + player.name() + " вышел с сервера. Всего голосов: [cyan]" + cur + "[accent], необходимо голосов: [cyan]" +  req)
+            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: " + player.name() + " вышел с сервера. Всего голосов: [cyan]" + cur + "[accent], необходимо голосов: [cyan]" +  req);
         });
     }
 

@@ -106,7 +106,7 @@ public class Example extends Plugin {
 
         Events.on(PlayerLeave.class, event -> {
             //Проверяем, голосовал ли игрок за выдачу админки каждому
-            if (!votes.contains(playerLeave.player.uuid())) return;
+            if (!votes.contains(event.player.uuid())) return;
             //Убираем игрока из проголосовавших
             votes.remove(event.player.uuid());
             //Вычисляем, сколько сейчас голосов
@@ -114,7 +114,7 @@ public class Example extends Plugin {
             //Вычисляем, сколько голосов надо для успешного завершения голосования
             int req = (int) Math.ceil(ratio * Groups.player.size());
             //Уведомляем всех о выходе игрока
-            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: " + player.name() + " вышел с сервера. Всего голосов: [cyan]" + cur + "[accent], необходимо голосов: [cyan]" +  req);
+            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: " + event.player.name() + " вышел с сервера. Всего голосов: [cyan]" + cur + "[accent], необходимо голосов: [cyan]" +  req);
         });
     }
 

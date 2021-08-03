@@ -17,7 +17,16 @@ import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.entities.*;
 
+//Импорты пакетов из джавы
+import java.util.*;
+
 public class Example extends Plugin {
+
+    //Список, где хранятся проголосовавшие
+    private final HashSet<String> votes = new HashSet<>();
+    //Сколько процентов должно проголосовать, чтобы голосование было успешно
+    private double ratio = 0.6;
+
 
     //Метод init() выполняется, когда сервер запускается
     @Override
@@ -89,6 +98,23 @@ public class Example extends Plugin {
                 //Это значит, что если его не контролирует игрок, то он моментально деспавнится
                 m.spawnedByCore = true;
             });
+        });
+
+
+        //Ивент дисконнекта игрока
+        //Если игрок был кикнут или забанен, он так же вызывается
+
+        Events.on(PlayerLeave.class, event -> {
+            //Проверяем, голосовал ли игрок за выдачу админки каждому
+            if (!votes.contains(playerLeave.player.uuid())) return;
+            //Убираем игрока из проголосовавших
+            votes.remove(event.player.uuid());
+            //Вычисляем, сколько сейчас голосов
+            int cur = votes.size();
+            //Вычисляем, сколько голосов надо для успешного завершения голосования
+            int req = (int) Math.ceil(ratio * Groups.player.size());
+            //Уведомляем всех о выходе игрока
+            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: " + player.name() + " вышел с сервера. Всего голосов: [cyan]" + cur + "[accent], необходимо голосов: [cyan]" +  req)
         });
     }
 

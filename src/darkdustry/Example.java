@@ -3,12 +3,15 @@ package darkdustry;
 
 //Импорты пакетов из arc
 import arc.util.*;
+import arc.*;
 
 //Импорты пакетов из mindustry
 import mindustry.mod.*;
 import mindustry.Vars;
 import mindustry.gen.*;
 import mindustry.game.*;
+import mindustry.net*;
+import mindustry.game.EventType.*;
 
 public class Example extends Plugin {
 

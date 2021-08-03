@@ -84,7 +84,7 @@ public class Example extends Plugin {
 
         Events.run(Trigger.update, () -> {
             //Находим всех юнитов типа "Мега"
-            Groups.unit.each(u -> u.type() == UnitType.mega, m -> {
+            Groups.unit.each(u -> u.type() == UnitTypes.mega, m -> {
                 //Задаём юниту значение "spawnedByCore" true
                 //Это значит, что если его не контролирует игрок, то он моментально деспавнится
                 m.spawnedByCore = true;
@@ -96,6 +96,44 @@ public class Example extends Plugin {
     @Override
     public void registerClientCommands(CommandHandler handler) {
 
+        //Создаём простейшую команду, которая отправит в чат то, что ввел игрок
+        //В скобках идёт сначала название, потом аргументы, потом описание команды
+        //Если аргумент выделен через "<>", то он обязательный, а если через "[]", то необязательный
+        //Если в аргументе есть "...", то в него попадет весь текст, который введёт игрок, а не только первое слово
+
+        handler.<Player>register("say", "<Текст...>", "Сказать в чат анонимно.", (args, player) -> {
+            Call.sendMessage("[lightgray]Анонимус[white]: " + args[0]);
+        });
+
+
+        //Как видно на этом примере, аргументов у команды может не быть совсем.
+        //Создадим команду для голосования на выдачу админки всем игрокам на сервере.
+
+        handler.<Player>register("voteadmins", "Голосовать за выдачу админки всем.", (args, player) -> {
+            //Проверяем, голосовал ли игрок
+            if (votes.contains(player.uuid())) {
+                player.sendMessage("Ты уже проголосовал!");
+                //return прерывает выполнение команды
+                return;
+            }
+            //Добавляем игрока к проголосовавшим
+            votes.add(player.uuid());
+            //Получаем количество голосов на данный момент
+            int cur = this.votes.size();
+            //Получаем количество необходимых голосов
+            int req = (int) Math.ceil(ratio * Groups.player.size());
+            
+            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: " + player.name() + " [accent]проголосовал за выдачу админки каждому! Всего голосов: [cyan]" + cur + "[accent], необходимо голосов: [cyan]" +  req);
+
+            //Проверяем, набраны ли голоса
+            if (cur < req) return;
+            
+            //Голоса набраны, очищаем их
+            this.votes.clear();
+            //Выдаём админку каждому игроку (до перезахода на сервер)
+            Groups.player.each(p -> p.admin = true);
+            Call.sendMessage("[[scarlet]VOTEADMINS[white]]: [lime]голосование завершено, выдаю админку всем игрокам на сервере!");
+        });
     }
 
     //Этот метод содержит все команды для консоли

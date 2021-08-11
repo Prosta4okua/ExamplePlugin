@@ -151,8 +151,10 @@ public class Example extends Plugin {
         //Создаём команду, которая заспавнит моно в точке, где находится игрок.
 
         handler.<Player>register("spawnmono", "Заспавнить моно.", (args, player) -> {
+            //Ищем юнита mono среди всех юнитов игры
+            UnitType mono = Vars.content.units().find(b -> b.name.equals("mono"));
             //Спавним юнита mono за ту же команду, что и игрок, на координатах игрока
-            UnitType.mono.spawn(player.team(), player.x, player.y);
+            mono.spawn(player.team(), player.x, player.y);
             //Отправляем игроку сообщение
             player.sendMessage("Ты заспавнил себе [lime]моно[]!");
         });

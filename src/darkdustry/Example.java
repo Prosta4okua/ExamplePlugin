@@ -52,6 +52,22 @@ public class Example extends Plugin {
         });
 
 
+        //Добавляем фильтр на чат. 
+        //Данный фильтр отслеживает сообщение "oh no"
+
+        Vars.netServer.admins.addChatFilter((player, text) -> {
+            //Проверяем, является ли сообщение "oh no"
+            if (text.equals("oh no")) {
+                //Вызываем вылезающую сверху экрана надпись
+                Call.infoPopup("[scarlet]OH NO");
+                //Отменяем отправку сообщения в чат
+                return null;
+            }
+            //Подтверждаем отправку сообщения в чат
+            return text;
+        });
+
+
         //Это один из ивентов в mindustry.
         //Он вызывается, когда загружается новая карта.
 

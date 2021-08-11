@@ -58,8 +58,8 @@ public class Example extends Plugin {
         Vars.netServer.admins.addChatFilter((player, text) -> {
             //Проверяем, является ли сообщение "oh no"
             if (text.equals("oh no")) {
-                //Вызываем вылезающую сверху экрана надпись
-                Call.infoToast("[scarlet]OH NO");
+                //Вызываем вылезающую сверху экрана надпись, которая будет висеть 10 секунд
+                Call.infoToast("[scarlet]OH NO", 10f);
                 //Отменяем отправку сообщения в чат
                 return null;
             }

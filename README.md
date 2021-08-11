@@ -9,12 +9,8 @@
 - Если используете этот плагин, или код из него, пожалуйста, оставляйте ссылку на оригинал.
 - Не рекомендую использовать плагин на публичных серверах.
 
-## Building
-First, make sure you have JDK 14 installed. Then, setup [plugin.json](src/main/resources/plugin.json) and run the following commands:
-
-* Windows: `gradlew jar`
-* *nix/Mac OS: `./gradlew jar`
-
-### Troubleshooting
-
-* If the terminal returns `Permission denied` or `Command not found`, run `chmod +x ./gradlew`.
+## Скачивание плагина:
+- Перейди в раздел Actions
+- Выбери последнюю успешную компиляцию (значок галочки)
+- Нажми на него
+- Пролистай вниз и скачай zip-архив, в котором лежит плагин (файл.jar)

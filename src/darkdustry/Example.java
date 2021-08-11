@@ -59,7 +59,7 @@ public class Example extends Plugin {
             //Проверяем, является ли сообщение "oh no"
             if (text.equals("oh no")) {
                 //Вызываем вылезающую сверху экрана надпись
-                Call.infoPopup("[scarlet]OH NO");
+                Call.infoToast("[scarlet]OH NO");
                 //Отменяем отправку сообщения в чат
                 return null;
             }
